@@ -241,14 +241,18 @@ namespace PrincipiaContracts
 		private double GetDistanceFromBody(Vessel vessel, string bodyName)
 		{
 			CelestialBody body = GetCelestialBody(bodyName);
-			return Vector3d.Distance(vessel.GetWorldPos3D(), body.position);
+			double distance = Vector3d.Distance(vessel.GetWorldPos3D(), body.position);
+			Utils.Log("Distance to ", bodyName, ": ", distance.ToString());
+			return distance;
 		}
 
 		private double GetAngleFromBody(Vessel vessel, string bodyName)
 		{
 			CelestialBody body = GetCelestialBody(bodyName);
-			Vector3d bodyMinusVessel = body.position - vessel.GetWorldPos3D();
-			return Vector3d.Angle(bodyMinusVessel, body.GetFwdVector());
+			Vector3d bodyMinusVessel = vessel.GetWorldPos3D() - body.position;
+			double angle = Vector3d.Angle(bodyMinusVessel, body.getRFrmVelOrbit(body.GetOrbit()));
+			Utils.Log("Angle to ", bodyName, "'s prograde vector: ", angle.ToString());
+			return angle;
 		}
 
 		private Dictionary<string, CelestialBody> cachedBodies = new Dictionary<string, CelestialBody>();

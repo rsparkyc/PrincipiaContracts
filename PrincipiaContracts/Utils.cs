@@ -20,12 +20,12 @@ namespace PrincipiaContracts
 
 		public static string FormatDistance(double distance)
 		{
-			return distance.ToString();
+			return distance.ToString("N0") + " m";
 		}
 
 		public static string FormatAngle(double angle)
 		{
-			return angle.ToString();
+			return angle.ToString() + "°";
 		}
 	}
 }

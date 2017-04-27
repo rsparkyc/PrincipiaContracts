@@ -52,18 +52,14 @@ namespace PrincipiaContracts
 
 			this.childDistance = childDistance;
 			this.childTolerance = childTolerance;
-			minChildDistance = childDistance - childTolerance;
-			maxChildDistance = childDistance + childTolerance;
 
 			this.parentDistance = parentDistance;
 			this.parentTolerance = parentTolerance;
-			minParentDistance = parentDistance - parentTolerance;
-			maxParentDistance = parentDistance + parentTolerance;
 
 			this.angle = angle;
 			this.angleTolerance = angleTolerance;
-			minAngle = angle - angleTolerance;
-			maxAngle = angle + angleTolerance;
+
+			SetMinMaxValues();
 
 			CreateDelegates();
 		}
@@ -114,7 +110,7 @@ namespace PrincipiaContracts
 
 		private string BuildDistanceNote(string bodyName, string qualifier, double distance)
 		{
-			return "Be " + qualifier + " " + Utils.FormatDistance(distance) + " from " + bodyName; 
+			return "Be " + qualifier + " " + Utils.FormatDistance(distance) + " from " + bodyName;
 		}
 
 		private string BuildMinAngleNote(string bodyName, double angle)
@@ -165,11 +161,23 @@ namespace PrincipiaContracts
 					angleTolerance = Convert.ToDouble(node.GetValue(ANGLE_TOLERANCE));
 				}
 
+				SetMinMaxValues();
+
 				CreateDelegates();
 			}
 			finally {
 				ParameterDelegate<Vessel>.OnDelegateContainerLoad(node);
 			}
+		}
+
+		private void SetMinMaxValues()
+		{
+			minChildDistance = childDistance - childTolerance;
+			maxChildDistance = childDistance + childTolerance;
+			minParentDistance = parentDistance - parentTolerance;
+			maxParentDistance = parentDistance + parentTolerance;
+			minAngle = angle - angleTolerance;
+			maxAngle = angle + angleTolerance;
 		}
 
 		protected void CreateDelegates()
@@ -240,7 +248,7 @@ namespace PrincipiaContracts
 		{
 			CelestialBody body = GetCelestialBody(bodyName);
 			Vector3d bodyMinusVessel = body.position - vessel.GetWorldPos3D();
-			return  Vector3d.Angle(bodyMinusVessel, body.GetFwdVector());
+			return Vector3d.Angle(bodyMinusVessel, body.GetFwdVector());
 		}
 
 		private Dictionary<string, CelestialBody> cachedBodies = new Dictionary<string, CelestialBody>();

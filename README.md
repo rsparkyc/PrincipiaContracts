@@ -54,7 +54,7 @@ The best way to explain this is probably with some sample configs.
                 parentDistance = 12000000
                 parentTolerance =  500000
                 angle = 30                # Here you can see that we have an angle of 30
-                                          # This makes us ahead of the moon
+                                          # This makes us ahead of the Mun
                 angleTolerance = 5
             }
             PARAMETER

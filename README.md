@@ -102,3 +102,6 @@ The best way to explain this is probably with some sample configs.
         }
     }
 
+Here you can see where the 30 and 150 come from
+![Lagrange Angles](https://github.com/rsparkyc/PrincipiaContracts/blob/master/LagrangeAngles.png?raw=true "Lagrange Angles")
+

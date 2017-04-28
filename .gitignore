@@ -1,4 +1,5 @@
 .vs
 *.user
-PrincipiaContracts/bin
-PrincipiaContracts/obj
+*.zip
+Source/PrincipiaContracts/bin
+Source/PrincipiaContracts/obj
